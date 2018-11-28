@@ -1,0 +1,41 @@
+{
+  "name": "cache-server",
+  "version": "1.0.0",
+  "description": "The cache server built on NodeJS and Puppeteer.",
+  "author": {
+    "name": "Madan Sapkota",
+    "email": "code@madansapkota.com",
+    "url": "https://madansapkota.com/"
+  },
+  "license": "MIT",
+  "private": true,
+  "main": "app.js",
+  "repository": "git@gitlab.com:startfast/cache-server.git",
+  "bugs": {
+    "email": "code@madansapkota.com",
+    "url": "https://gitlab.com/startfast/cache-server/issues"
+  },
+  "keywords": [
+    "cache",
+    "server",
+    "nodejs",
+    "puppeteer"
+  ],
+  "os": [
+    "darwin",
+    "win32",
+    "linux"
+  ],
+  "engines": {
+    "node": ">=8.12",
+    "npm": ">=6.4",
+    "yarn": ">=1.12"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.config.js --mode=development",
+    "dev": "webpack --config webpack.config.js --mode=development",
+    "build": "webpack --config webpack.config.js --mode=production --progress --hide-modules",
+    "test": "",
+    "test:e2e": ""
+  }
+}
