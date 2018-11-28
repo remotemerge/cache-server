@@ -32,10 +32,10 @@
     "yarn": ">=1.12"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.js --mode=development",
-    "dev": "webpack --config webpack.config.js --mode=development",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js --mode=development",
+    "dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --mode=development",
     "dev:flow": "yarn flow",
-    "build": "webpack --config webpack.config.js --mode=production --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --progress --hide-modules"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -51,6 +51,7 @@
     "@types/node": "^10.12.10",
     "@types/webpack": "^4.4.19",
     "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
     "eslint": "^5.9.0",
     "eslint-loader": "^2.1.1",
     "flow-bin": "^0.87.0",
