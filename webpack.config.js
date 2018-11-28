@@ -3,6 +3,8 @@ const webpack = require('webpack');
 
 // terser minify plugin
 const TerserPlugin = require('terser-webpack-plugin');
+// webpack externals
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = (env, argv) => ({
     entry: {
@@ -19,7 +21,6 @@ module.exports = (env, argv) => ({
             'isDev': (argv.mode === 'development')
         })
     ],
-    watch: argv.mode !== 'production' || (argv.watch !== undefined && argv.watch === 'true'),
     module: {
         noParse: /lodash/,
         rules: [
@@ -104,5 +105,8 @@ module.exports = (env, argv) => ({
             })
         ] : []
     },
+    watch: argv.mode !== 'production' || (argv.watch !== undefined && argv.watch === 'true'),
+    target: 'node',
+    externals: [nodeExternals()],
     devtool: (argv.mode === 'production') ? '' : '#source-map'
 });
