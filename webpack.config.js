@@ -25,15 +25,15 @@ module.exports = (env, argv) => ({
         noParse: /lodash/,
         rules: [
             {
-                enforce: "pre",
+                enforce: 'pre',
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: "eslint-loader",
+                loader: 'eslint-loader',
             },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: "babel-loader",
+                loader: 'babel-loader',
             },
             {
                 test: /\.scss$/,
