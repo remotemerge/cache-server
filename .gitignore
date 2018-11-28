@@ -1,0 +1,57 @@
+### ignore build directories
+cache/
+dist/
+output/
+
+### JetBrains template
+.idea/
+
+### VisualStudioCode template
+.vscode/
+
+### NetBeans template
+nbproject/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+### Node template
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+bower_components/
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.next
+
+### Sass template
+.sass-cache/
+*.css.map
+
+### Windows template
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+[Dd]esktop.ini
+*.lnk
+
+### macOS template
+.DS_Store
+._*
+
+### Linux template
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+### custom ignores
+composer-lock.json
+package-lock.json
+yarn.lock
