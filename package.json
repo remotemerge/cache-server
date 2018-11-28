@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "private": true,
-  "main": "app.js",
+  "main": "src/app.js",
   "repository": {
     "type": "git",
     "url": "git@gitlab.com:startfast/cache-server.git"
@@ -34,6 +34,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js --mode=development",
     "dev": "webpack --config webpack.config.js --mode=development",
+    "dev:flow": "yarn flow",
     "build": "webpack --config webpack.config.js --mode=production --progress --hide-modules"
   },
   "dependencies": {
@@ -51,7 +52,9 @@
     "@types/webpack": "^4.4.19",
     "babel-loader": "^8.0.4",
     "eslint": "^5.9.0",
+    "eslint-loader": "^2.1.1",
     "flow-bin": "^0.87.0",
+    "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.1.0",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
