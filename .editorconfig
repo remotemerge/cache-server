@@ -15,5 +15,5 @@ insert_final_newline = false
 trim_trailing_whitespace = false
 
 # config for JSON and YAML
-[{composer.json, package.json, *.yml, .babelrc, .eslintrc, .flowconfig}]
+[{composer.json, package.json, *.yml, .babelrc, .flowconfig}]
 indent_size = 2
