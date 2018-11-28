@@ -10,16 +10,16 @@
   "license": "MIT",
   "private": true,
   "main": "app.js",
-  "repository": "git@gitlab.com:startfast/cache-server.git",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:startfast/cache-server.git"
+  },
   "bugs": {
     "email": "code@madansapkota.com",
     "url": "https://gitlab.com/startfast/cache-server/issues"
   },
   "keywords": [
-    "cache",
-    "server",
-    "nodejs",
-    "puppeteer"
+    "cache-server"
   ],
   "os": [
     "darwin",
@@ -46,6 +46,8 @@
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
+    "@types/node": "^10.12.10",
+    "@types/webpack": "^4.4.19",
     "babel-loader": "^8.0.4",
     "eslint": "^5.9.0",
     "terser-webpack-plugin": "^1.1.0",
