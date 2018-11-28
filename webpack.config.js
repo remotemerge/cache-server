@@ -4,12 +4,6 @@ const webpack = require('webpack');
 // terser minify plugin
 const TerserPlugin = require('terser-webpack-plugin');
 
-// use mini css in production
-let getStyleLoader = (argv) => {
-    // return (argv.mode === 'production') ? MiniCssExtractPlugin.loader : 'vue-style-loader';
-    return (argv.mode === 'production') ? 'vue-style-loader' : 'vue-style-loader';
-};
-
 module.exports = (env, argv) => ({
     entry: {
         'app': './src/app.js'
