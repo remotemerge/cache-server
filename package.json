@@ -33,7 +33,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js --mode=development",
     "dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --mode=development",
-    "dev:flow": "yarn flow",
+    "lint": "eslint src",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --progress --hide-modules"
   },
   "dependencies": {
@@ -45,10 +45,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-flow": "^7.0.0",
     "@types/node": "^10.12.10",
     "@types/webpack": "^4.4.19",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "cross-env": "^5.2.0",
     "eslint": "^5.9.0",
