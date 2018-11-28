@@ -1,5 +1,8 @@
 {
   "plugins": [],
+  "presets": [
+    "@babel/preset-flow"
+  ],
   "env": {
     "development": {
       "presets": [
