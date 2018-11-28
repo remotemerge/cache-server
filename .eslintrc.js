@@ -1,3 +1,4 @@
+let nodeEnv = process.env.NODE_ENV;
 module.exports = {
     "root": true,
     "env": {
@@ -6,9 +7,13 @@ module.exports = {
         "commonjs": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
     "rules": {
         "indent": [
@@ -24,9 +29,10 @@ module.exports = {
             "single"
         ],
         "semi": [
-            "error",
+            "warn",
             "always"
         ],
-        "no-console": process.env.NODE_ENV === "production" ? "error" : "off"
+        "no-unused-vars": nodeEnv === "production" ? "error" : "warn",
+        "no-console": nodeEnv === "production" ? "error" : "warn"
     }
 };
