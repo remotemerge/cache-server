@@ -1,4 +1,6 @@
-let nodeEnv = process.env.NODE_ENV;
+const nodeEnv = process.env.NODE_ENV;
+let status = (nodeEnv === 'production') ? 'error' : 'warn';
+
 module.exports = {
   'root': true,
   'env': {
@@ -17,22 +19,22 @@ module.exports = {
   },
   'rules': {
     'indent': [
-      'error',
+      status,
       2
     ],
     'linebreak-style': [
-      'error',
+      status,
       'unix'
     ],
     'quotes': [
-      'error',
+      status,
       'single'
     ],
     'semi': [
-      'warn',
+      status,
       'always'
     ],
-    'no-unused-vars': nodeEnv === 'production' ? 'error' : 'warn',
-    'no-console': nodeEnv === 'production' ? 'error' : 'warn'
+    'no-unused-vars': status,
+    'no-console': status
   }
 };
