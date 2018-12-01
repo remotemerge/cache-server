@@ -1,4 +1,5 @@
-// @flow
+import Catcher from './Catcher';
+
 const puppeteer = require('puppeteer');
 const url = require('url');
 const _ = require('lodash');
@@ -21,66 +22,42 @@ let getHostname = (testUrl) => {
   return url.parse(testUrl).hostname.replace(/^(?:w{3}\.)/guism, '');
 };
 
-let isBlockedUrl = (testUrl): boolean => {
-  let blacklist = [
-    'connect.facebook.net',
-    'connect.facebook.net',
-    'google-analytics.com',
-    'googletagmanager.com',
-    'googleadservices.com',
-    'googleads.g.doubleclick.net',
-    'syndication.twitter.com',
-    'platform.twitter.com',
-    'px.ads.linkedin.com',
-    's.sharethis.com', 'l.sharethis.com',
-    'js.stripe.com', 'm.stripe.com'
-  ];
-  return _.includes(blacklist, getHostname(testUrl));
-};
-
 export default {
   async render(testUrl) {
     // init content holder
     let html = '';
     // init browser and page
     const browser = await puppeteer.launch({
-      headless: true, // default is true
+      headless: false, // default is true
       ignoreHTTPSErrors: true, // default false
       timeout: 60000, // default to 30 seconds
     });
     const page = await browser.newPage();
     // set custom agent
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36');
-    await page.setViewport({width: 1920, height: 1080});
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36');
+    //await page.setViewport({width: 1920, height: 1080});
 
     // request handler
-    await page.setRequestInterception(true);
+    /*await page.setRequestInterception(true);
     page.on('request', request => {
-      // accepted resources
-      /*let resources = ['document', 'eventsource', 'fetch', 'manifest', 'other', 'script', 'texttrack', 'websocket', 'xhr'];
-      if (_.includes(resources, request.resourceType()) && !isBlockedUrl(request._url)) {
-          request.continue();
+      //request.continue();
+      let resources = ['document', 'eventsource', 'fetch', 'manifest', 'other', 'script', 'texttrack', 'websocket', 'xhr'];
+      Catcher.console(request.resourceType());
+      if (_.includes(resources, request.resourceType())) {
+        request.continue();
       } else {
-          request.abort();
-      }*/
-      request.continue();
-    });
-
-    // response handler
-    page.on('response', response => {
-      const status = response.status();
-    });
-
-    //page.waitFor(100);
+        request.abort();
+      }
+    });*/
 
     // handle the errors
     page.on('error', (error) => {
-      // console.log(error.message);
+      return error;
     });
 
     // handle the errors
-    page.on('pageerror', (error) => {
-      // console.log(error.message);
+    page.on('pageerror', (pageerror) => {
+      return pageerror;
     });
 
     try {
@@ -88,11 +65,10 @@ export default {
       await page.goto(testUrl, {waitUntil: 'networkidle2'});
       await page.waitForNavigation();
       // extract page content
-      await page.waitFor(6000);
+      //await page.waitFor(6000);
       html = await page.content();
-    } catch (e) {
-      await page.waitFor(12000);
-      html = await page.content();
+    } catch (error) {
+      html = error;
     }
     // close the browser
     await browser.close();
