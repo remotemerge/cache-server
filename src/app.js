@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import headless from './headless';
-
 import '@babel/polyfill';
+import headless from './headless';
+import Catcher from './Catcher';
 
 // init express
 const app = express();
@@ -23,8 +23,8 @@ app.get('/cache', (req, res) => {
     let testUrl = Buffer.from(req.query.u, 'base64').toString('ascii');
     headless.render(testUrl).then((response) => {
       res.send(response);
-    }).catch((e) => {
-      // handle the exception
+    }).catch(() => {
+      res.send('Failed to render the Url.');
     });
   } else {
     res.send('Invalid Url and params!');
@@ -38,4 +38,4 @@ app.get('*', (req, res) => {
 
 // start app in port 8095
 const port = process.env.PORT || 8095;
-app.listen(port, () => console.log('http://localhost:' + port));
+app.listen(port, () => Catcher.console('Server started', 'http://localhost:' + port));
