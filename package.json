@@ -31,9 +31,10 @@
     "yarn": ">=1.12"
   },
   "scripts": {
-    "lint": "eslint src",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js --mode=development",
     "dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --mode=development",
+    "lint": "eslint --ext .js,.vue,.jsx src",
+    "lint:fix": "eslint --ext .js,.vue,.jsx --fix src",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --progress --hide-modules"
   },
   "dependencies": {
