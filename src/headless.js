@@ -68,7 +68,7 @@ export default {
       //await page.waitFor(6000);
       html = await page.content();
     } catch (error) {
-      html = error;
+      html = await page.content();
     }
     // close the browser
     await browser.close();
