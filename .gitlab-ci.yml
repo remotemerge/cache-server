@@ -2,9 +2,6 @@ stages:
   - install-lint
   - build-test
   - deploy
-cache:
-  paths:
-    - node_modules/
 app-install-lint:
   image: node:10.14
   stage: install-lint
@@ -12,6 +9,9 @@ app-install-lint:
     - yarn
   script:
     - yarn lint
+  artifacts:
+    paths:
+      - node_modules/
 app-build-test:
   image: node:10.14
   stage: build-test
@@ -26,3 +26,4 @@ app-deploy:
     - master
   script:
     - echo "Done!" # @todo code deploy commands
+  dependencies: []
