@@ -52,6 +52,4 @@ ehthumbs_vista.db
 .nfs*
 
 ### custom ignores
-composer-lock.json
 package-lock.json
-yarn.lock
