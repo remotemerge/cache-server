@@ -1,45 +1,28 @@
-image: node:latest
+image: node:10.14
 
 stages:
-  - install
-  - lint
-  - build
-  - test
+  - install-lint
+  - build-test
   - deploy
 cache:
   paths:
     - node_modules/
     - dist/
-app_install:
-  stage: install
+app-install-lint:
+  stage: install-lint
   script:
-    - npm install
-    - npm update
-  artifacts:
-    paths:
-      - node_modules/
-app_lint:
-  stage: lint
-  script:
+    - npm install --progress=false && npm update --progress=false
     - npm run lint
-app_build:
-  stage: build
+app-build-test:
+  stage: build-test
   only:
     - master
   script:
     - npm run build
-  artifacts:
-    paths:
-      - dist/
-app_test:
-  stage: test
-  only:
-    - master
-  script:
-    - npm -v
-app_deploy:
+    - npm -v # @todo code test commands
+app-deploy:
   stage: deploy
   only:
     - master
   script:
-    - node -v
+    - node -v # @todo code deploy commands
