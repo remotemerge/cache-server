@@ -5,7 +5,6 @@ stages:
 cache:
   paths:
     - node_modules/
-    - dist/
 app-install-lint:
   image: node:10.14
   stage: install-lint
