@@ -1,5 +1,3 @@
-image: node:10.14
-
 stages:
   - install-lint
   - build-test
@@ -9,20 +7,23 @@ cache:
     - node_modules/
     - dist/
 app-install-lint:
+  image: node:10.14
   stage: install-lint
+  before_script:
+    - yarn
   script:
-    - npm install --progress=false && npm update --progress=false
-    - npm run lint
+    - yarn lint
 app-build-test:
+  image: node:10.14
   stage: build-test
   only:
     - master
   script:
-    - npm run build
-    - npm -v # @todo code test commands
+    - yarn build
+    - yarn -v && node -v # @todo code test commands
 app-deploy:
   stage: deploy
   only:
     - master
   script:
-    - node -v # @todo code deploy commands
+    - echo "Done!" # @todo code deploy commands
