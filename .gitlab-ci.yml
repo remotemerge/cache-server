@@ -24,6 +24,8 @@ app_lint:
     - npm run lint
 app_build:
   stage: build
+  only:
+    - master
   script:
     - npm run build
   artifacts:
@@ -31,9 +33,13 @@ app_build:
       - dist/
 app_test:
   stage: test
+  only:
+    - master
   script:
     - npm -v
 app_deploy:
   stage: deploy
+  only:
+    - master
   script:
     - node -v
