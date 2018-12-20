@@ -17,7 +17,7 @@ export default {
     await page.setViewport({width: 812, height: 375});
 
     // request handler
-    await page.setRequestInterception(true);
+    /*await page.setRequestInterception(true);
     page.on('request', request => {
       // support resource types // updated
       // document, eventsource, fetch, font, image, manifest, media, other, script, stylesheet, texttrack, websocket, xhr
@@ -27,7 +27,7 @@ export default {
       } else {
         request.abort();
       }
-    });
+    });*/
 
     // handle the errors
     page.on('error', (error) => {
