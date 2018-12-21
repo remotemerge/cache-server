@@ -13,8 +13,8 @@ export default {
     });
     const page = await browser.newPage();
     // set custom agent
-    await page.setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1');
-    await page.setViewport({width: 812, height: 375});
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36');
+    await page.setViewport({width: 1920, height: 1080});
 
     // request handler
     /*await page.setRequestInterception(true);
