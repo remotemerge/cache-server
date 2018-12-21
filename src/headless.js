@@ -10,6 +10,10 @@ export default {
       headless: false, // default is true
       ignoreHTTPSErrors: true, // default false
       timeout: (timeout !== undefined) ? timeout : 60000, // default to 30 seconds
+      args: [
+        '--hide-scrollbars',
+        '--mute-audio'
+      ]
     });
     const page = await browser.newPage();
     // set custom agent
