@@ -9,7 +9,7 @@ export default {
     const browser = await puppeteer.launch({
       headless: false, // default is true
       ignoreHTTPSErrors: true, // default false
-      timeout: (timeout !== undefined) ? timeout : 30000, // default to 30 seconds
+      timeout: (timeout !== undefined) ? timeout : 60000, // default to 30 seconds
     });
     const page = await browser.newPage();
     // set custom agent
