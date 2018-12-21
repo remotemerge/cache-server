@@ -11,6 +11,7 @@ export default {
       ignoreHTTPSErrors: true, // default false
       timeout: (timeout !== undefined) ? timeout : 60000, // default to 30 seconds
       args: [
+        '--disable-notifications',
         '--hide-scrollbars',
         '--mute-audio'
       ]
