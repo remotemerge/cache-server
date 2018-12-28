@@ -3,10 +3,17 @@ import cors from 'cors';
 import '@babel/polyfill';
 import headless from './headless';
 import Catcher from './Catcher';
-// cli reader
 import cli from './cli';
 
+// configs from cli
 const configs = cli.reader();
+
+// configs from web request
+const runtimeConfigs = {
+  headless: configs.headless,
+  wait: configs.wait,
+  userAgent: ''
+};
 
 // init express
 const app = express();
@@ -23,9 +30,26 @@ app.use(bodyParser.urlencoded({
 
 // handle cache request
 app.get('/cache', (req, res) => {
+
+  // set headless from request
+  if (req.query.headless !== undefined) {
+    runtimeConfigs.headless = (typeof Boolean(req.query.headless) === 'boolean') ? JSON.parse(req.query.headless) : configs.headless;
+  }
+
+  // set wait from request
+  if (req.query.wait) {
+    runtimeConfigs.wait = !isNaN(req.query.wait) ? JSON.parse(req.query.wait) : configs.wait;
+  }
+
+  // set user agent from request
+  runtimeConfigs.userAgent = req.headers['user-agent'];
+  if (req.query.userAgent) {
+    runtimeConfigs.userAgent = req.query.userAgent;
+  }
+
   if (req.query.u) {
     let testUrl = Buffer.from(req.query.u, 'base64').toString('ascii');
-    headless.render(testUrl, configs).then((response) => {
+    headless.render(testUrl, runtimeConfigs).then((response) => {
       res.send(response);
     }).catch(() => {
       res.send('Failed to render the Url.');
