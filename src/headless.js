@@ -1,15 +1,15 @@
 const puppeteer = require('puppeteer');
-const _ = require('lodash');
+//const _ = require('lodash');
 
 export default {
-  async render(testUrl, timeout) {
+  async render(testUrl, configs) {
     // init content holder
     let html = '';
     // init browser and page
     const browser = await puppeteer.launch({
       headless: false, // default is true
       ignoreHTTPSErrors: true, // default false
-      timeout: (timeout !== undefined) ? timeout : 60000, // default to 30 seconds
+      timeout: 60000, // default to 30 seconds
       args: [
         '--disable-notifications',
         '--hide-scrollbars',
@@ -48,8 +48,10 @@ export default {
       // load page and wait for redirects
       await page.goto(testUrl, {waitUntil: 'networkidle2'});
       await page.waitForNavigation();
+      // wait for seconds
+      await page.waitFor(configs.wait);
+
       // extract page content
-      //await page.waitFor(6000);
       html = await page.content();
     } catch (error) {
       html = await page.content();
