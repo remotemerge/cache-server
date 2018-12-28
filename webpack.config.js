@@ -11,14 +11,19 @@ module.exports = (env, argv) => ({
     'app': './src/app.js'
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../cache-server-shadow'),
     publicPath: '/',
     filename: 'js/[name].js'
   },
   plugins: [
     // define global variables
     new webpack.DefinePlugin({
-      'isDev': (argv.mode === 'development')
+      'mode': JSON.stringify(argv.mode)
+    }),
+    // update banner for files
+    new webpack.BannerPlugin({
+      banner: (options) => options.basename === 'app.js' ? '#!/usr/bin/env node' : '',
+      raw: true
     })
   ],
   module: {
