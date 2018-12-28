@@ -113,5 +113,5 @@ module.exports = (env, argv) => ({
   watch: argv.mode !== 'production' || (argv.watch !== undefined && argv.watch === 'true'),
   target: 'node',
   externals: [nodeExternals()],
-  devtool: (argv.mode === 'production') ? '' : '#source-map'
+  devtool: (argv.mode === 'production') ? '' : ''//'#source-map'
 });
