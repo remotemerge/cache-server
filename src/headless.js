@@ -7,7 +7,7 @@ export default {
     let html = '';
     // init browser and page
     const browser = await puppeteer.launch({
-      headless: false, // default is true
+      headless: configs.headless, // default is true
       ignoreHTTPSErrors: true, // default false
       timeout: 60000, // default to 30 seconds
       args: [
@@ -18,7 +18,7 @@ export default {
     });
     const page = await browser.newPage();
     // set custom agent
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36');
+    await page.setUserAgent(configs.userAgent);
     await page.setViewport({width: 1920, height: 1080});
 
     // request handler
