@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 //const _ = require('lodash');
 
 export default {
-  async render(testUrl, configs) {
+  async render(configs) {
     // init content holder
     let html = '';
     // init browser and page
@@ -46,7 +46,7 @@ export default {
 
     try {
       // load page and wait for redirects
-      await page.goto(testUrl, {waitUntil: 'networkidle2'});
+      await page.goto(configs.url, {waitUntil: 'networkidle2'});
       await page.waitForNavigation();
       // wait for seconds
       await page.waitFor(configs.wait);
