@@ -12,6 +12,7 @@ const configs = cli.reader();
 const runtimeConfigs = {
   headless: configs.headless,
   wait: configs.wait,
+  url: '',
   userAgent: ''
 };
 
@@ -29,7 +30,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // handle cache request
-app.get('/cache', (req, res) => {
+app.get('/v1/cache', (req, res) => {
 
   // set headless from request
   if (req.query.headless !== undefined) {
@@ -47,15 +48,20 @@ app.get('/cache', (req, res) => {
     runtimeConfigs.userAgent = req.query.userAgent;
   }
 
-  if (req.query.u) {
-    let testUrl = Buffer.from(req.query.u, 'base64').toString('ascii');
-    headless.render(testUrl, runtimeConfigs).then((response) => {
+  if (req.query.url || req.query.u) {
+    // accept both url and u parameter for URL.
+    if (req.query.url) {
+      runtimeConfigs.url = req.query.url;
+    } else {
+      runtimeConfigs.url = Buffer.from(req.query.u, 'base64').toString('ascii');
+    }
+    headless.render(runtimeConfigs).then((response) => {
       res.send(response);
     }).catch(() => {
       res.send('Failed to render the Url.');
     });
   } else {
-    res.send('Invalid Url and params!');
+    res.send('Invalid Url and/or params!');
   }
 });
 
@@ -66,4 +72,4 @@ app.get('*', (req, res) => {
 
 // start app in port 8095
 const port = process.env.PORT || configs.port;
-app.listen(port, () => Catcher.console('Server started', 'http://localhost:' + port));
+app.listen(port, () => Catcher.console('Server started', `http://${configs.host}:${port}`));
