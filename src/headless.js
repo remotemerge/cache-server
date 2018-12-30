@@ -49,7 +49,7 @@ export default {
       await page.goto(configs.url, {waitUntil: 'networkidle2'});
       await page.waitForNavigation();
       // wait for seconds
-      await page.waitFor(configs.wait);
+      await page.waitFor(configs.wait * 1000);
 
       // extract page content
       html = await page.content();
