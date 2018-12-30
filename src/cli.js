@@ -11,7 +11,7 @@ export default {
     // regex match holder
     let match;
     // pattern to match params
-    const regex = /--(?<param>\w+)=(?<value>\w+)/gmi;
+    const regex = /--(\w+)=([0-9a-zA-Z.]+)/gmi;
 
     // read the command arguments
     const [, , ...args] = process.argv;
@@ -38,8 +38,8 @@ export default {
 
     while ((match = regex.exec(args)) !== null) {
       // overwrite the defaults
-      if (configs[match.groups.param] !== undefined) {
-        configs[match.groups.param] = validate(match.groups.param, match.groups.value);
+      if (configs[match[1]] !== undefined) {
+        configs[match[1]] = validate(match[1], match[2]);
       }
     }
     return configs;
