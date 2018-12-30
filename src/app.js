@@ -70,6 +70,6 @@ app.get('*', (req, res) => {
   res.send('Cache server is Running!');
 });
 
-// start app in port 8095
+// default port 8095
 const port = process.env.PORT || configs.port;
 app.listen(port, () => Catcher.console('Server started', `http://${configs.host}:${port}`));
