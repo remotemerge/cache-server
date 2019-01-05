@@ -13,7 +13,7 @@ const runtimeConfigs = {
   headless: configs.headless,
   wait: configs.wait,
   url: '',
-  userAgent: ''
+  userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
 };
 
 // init express
@@ -43,9 +43,10 @@ app.get('/v1/cache', (req, res) => {
   }
 
   // set user agent from request
-  runtimeConfigs.userAgent = req.headers['user-agent'];
   if (req.query.userAgent) {
     runtimeConfigs.userAgent = req.query.userAgent;
+  } else if (req.headers['user-agent']) {
+    runtimeConfigs.userAgent = req.headers['user-agent'];
   }
 
   if (req.query.url || req.query.u) {
