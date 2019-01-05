@@ -5,7 +5,7 @@ export default {
       host: 'localhost',
       port: 8095,
       wait: 1, // wait for 1 second
-      headless: true
+      headless: false
     };
 
     // regex match holder
