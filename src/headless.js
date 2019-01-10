@@ -11,11 +11,11 @@ export default {
       ignoreHTTPSErrors: true, // default false
       timeout: 60000, // default to 30 seconds
       args: [
+        '--disable-infobars',
         '--disable-notifications',
         '--hide-scrollbars',
         '--mute-audio',
-        '--no-startup-window',
-        '--disable-infobars'
+        '--no-sandbox'
       ]
     });
     const page = await browser.newPage();
