@@ -13,7 +13,9 @@ export default {
       args: [
         '--disable-notifications',
         '--hide-scrollbars',
-        '--mute-audio'
+        '--mute-audio',
+        '--no-startup-window',
+        '--disable-infobars'
       ]
     });
     const page = await browser.newPage();
