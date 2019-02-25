@@ -13,6 +13,8 @@ export default {
       args: [
         '--disable-infobars',
         '--disable-notifications',
+        '--disable-remote-fonts',
+        '--disable-web-security',
         '--hide-scrollbars',
         '--mute-audio',
         '--no-sandbox'
