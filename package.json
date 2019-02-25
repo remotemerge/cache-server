@@ -1,6 +1,6 @@
 {
   "name": "cache-server",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "The cache server built on NodeJS and Puppeteer.",
   "author": {
     "name": "Madan Sapkota",
