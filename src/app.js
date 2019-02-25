@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import '@babel/polyfill';
 import headless from './headless';
 import Catcher from './Catcher';
 import cli from './cli';
