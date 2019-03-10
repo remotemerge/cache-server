@@ -1,6 +1,6 @@
 {
   "name": "cache-server",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "The cache server built on NodeJS and Puppeteer.",
   "author": {
     "name": "Madan Sapkota",
@@ -43,23 +43,23 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
-    "puppeteer": "^1.12.2"
+    "puppeteer": "^1.13.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.3.1",
-    "@types/node": "^11.9.5",
-    "@types/webpack": "^4.4.24",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@types/node": "^11.11.0",
+    "@types/webpack": "^4.4.25",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
-    "eslint": "^5.14.1",
+    "eslint": "^5.15.1",
     "eslint-loader": "^2.1.2",
     "style-loader": "^0.23.1",
-    "terser-webpack-plugin": "^1.2.2",
-    "webpack": "^4.29.5",
+    "terser-webpack-plugin": "^1.2.3",
+    "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.0",
+    "webpack-dev-server": "^3.2.1",
     "webpack-node-externals": "^1.7.2"
   }
 }
