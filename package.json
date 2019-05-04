@@ -1,6 +1,6 @@
 {
   "name": "cache-server",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "The cache server built on NodeJS and Puppeteer.",
   "author": {
     "name": "Madan Sapkota",
@@ -39,27 +39,27 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --progress --hide-modules"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
-    "puppeteer": "^1.13.0"
+    "puppeteer": "^1.15.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
-    "@types/node": "^11.11.7",
-    "@types/webpack": "^4.4.26",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@types/node": "^12.0.0",
+    "@types/webpack": "^4.4.29",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
-    "eslint": "^5.15.3",
+    "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.2.3",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1",
     "webpack-node-externals": "^1.7.2"
   }
 }
