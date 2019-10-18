@@ -28,7 +28,7 @@
   "engines": {
     "node": ">=8.16",
     "npm": ">=6.12",
-    "yarn": ">=1.19"
+    "yarn": ">=1.17"
   },
   "node_version": "8.16",
   "scripts": {
