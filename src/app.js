@@ -12,7 +12,7 @@ const runtimeConfigs = {
   headless: configs.headless,
   wait: configs.wait,
   url: '',
-  userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+  userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36'
 };
 
 // init express
@@ -28,8 +28,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// handle cache request
-app.get('/v1/cache', (req, res) => {
+// handle cache request (GET)
+app.all('/v1/cache', (req, res) => {
 
   // set headless from request
   if (req.query.headless !== undefined) {
@@ -55,14 +55,22 @@ app.get('/v1/cache', (req, res) => {
     } else {
       runtimeConfigs.url = Buffer.from(req.query.u, 'base64').toString('ascii');
     }
-    headless.render(runtimeConfigs).then((response) => {
-      res.send(response);
-    }).catch(() => {
-      res.send('Failed to render the Url.');
-    });
+  } else if (req.body.url || req.body.u) {
+    // accept both url and u parameter for URL.
+    if (req.body.url) {
+      runtimeConfigs.url = req.body.url;
+    } else {
+      runtimeConfigs.url = Buffer.from(req.body.u, 'base64').toString('ascii');
+    }
   } else {
     res.send('Invalid Url and/or params!');
   }
+  // process the request
+  headless.render(runtimeConfigs).then((response) => {
+    res.send(response);
+  }).catch(() => {
+    res.send('Failed to render the Url.');
+  });
 });
 
 // handle all requests
