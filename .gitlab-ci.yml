@@ -3,7 +3,7 @@ stages:
   - build-test
   - deploy
 app-install-lint:
-  image: node:10.14
+  image: node:10.16
   stage: install-lint
   before_script:
     - yarn
@@ -13,7 +13,7 @@ app-install-lint:
     paths:
       - node_modules/
 app-build-test:
-  image: node:10.14
+  image: node:10.16
   stage: build-test
   only:
     - master
