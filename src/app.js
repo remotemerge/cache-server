@@ -28,7 +28,10 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// handle cache request (GET)
+// default render status
+let render = false;
+
+// handle cache request
 app.all('/v1/cache', (req, res) => {
 
   // set headless from request
@@ -49,28 +52,46 @@ app.all('/v1/cache', (req, res) => {
   }
 
   if (req.query.url || req.query.u) {
-    // accept both url and u parameter for URL.
+    // enable rendering
+    render = true;
+
+    // accept both url and u parameters.
     if (req.query.url) {
       runtimeConfigs.url = req.query.url;
     } else {
       runtimeConfigs.url = Buffer.from(req.query.u, 'base64').toString('ascii');
     }
   } else if (req.body.url || req.body.u) {
-    // accept both url and u parameter for URL.
+    // enable rendering
+    render = true;
+
+    // accept both url and u parameters.
     if (req.body.url) {
       runtimeConfigs.url = req.body.url;
     } else {
       runtimeConfigs.url = Buffer.from(req.body.u, 'base64').toString('ascii');
     }
   } else {
-    res.send('Invalid Url and/or params!');
+    res.json({
+      'status': 'failed',
+      'html': 'Invalid Url and/or params!'
+    });
   }
-  // process the request
-  headless.render(runtimeConfigs).then((response) => {
-    res.send(response);
-  }).catch(() => {
-    res.send('Failed to render the Url.');
-  });
+  if (render) {
+    // process the request
+    headless.render(runtimeConfigs).then((response) => {
+      res.json({
+        'status': 'ok',
+        'cookies': [],
+        'html': response
+      });
+    }).catch(() => {
+      res.json({
+        'status': 'failed',
+        'html': 'Failed to render the Url.'
+      });
+    });
+  }
 });
 
 // handle all requests
