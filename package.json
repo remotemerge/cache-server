@@ -1,21 +1,21 @@
 {
-  "name": "cache-server",
-  "version": "1.0.18",
-  "description": "The cache server built on NodeJS and Puppeteer.",
+  "name": "@sapkotamadan/cache-server",
+  "version": "1.0.19",
+  "description": "The cache server is a DOM rendering engine built on Node, Express and Google Puppeteer.",
   "author": {
     "name": "Madan Sapkota",
     "email": "code@madansapkota.com",
-    "url": "https://madansapkota.com/"
+    "url": "https://madansapkota.com"
   },
   "license": "MIT",
   "private": true,
   "main": "src/app.js",
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:startfast/cache-server.git"
+    "url": "git@github.com:sapkotamadan/cache-server.git"
   },
   "bugs": {
-    "url": "https://gitlab.com/startfast/cache-server/issues"
+    "url": "https://github.com/sapkotamadan/cache-server/issues"
   },
   "keywords": [
     "cache-server"
@@ -32,34 +32,36 @@
   },
   "node_version": "8.16",
   "scripts": {
+    "test": "node src/Package.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js --mode=development",
     "dev": "cross-env NODE_ENV=development webpack --config webpack.config.js --mode=development",
     "lint": "cross-env NODE_ENV=production eslint --ext .js,.vue,.jsx src",
     "lint:fix": "eslint --ext .js,.vue,.jsx --fix src",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --progress --hide-modules",
+    "package": "yarn lint && yarn build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
-    "puppeteer": "^1.20.0"
+    "puppeteer": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@types/node": "^12.11.1",
-    "@types/webpack": "^4.39.3",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@types/node": "^12.12.8",
+    "@types/webpack": "^4.39.9",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "cross-env": "^6.0.3",
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
     "eslint-loader": "^3.0.2",
     "style-loader": "^1.0.0",
-    "terser-webpack-plugin": "^2.1.3",
+    "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
     "webpack-node-externals": "^1.7.2"
   }
 }
