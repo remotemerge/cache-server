@@ -1,16 +1,23 @@
 root = true
 
-# applicable for all files
+# config for all files
 [*]
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 indent_style = space
-indent_size = 2
-max_line_length = off
+indent_size = 4
 trim_trailing_whitespace = true
+
+# config for ts, js, html and css files
+[{*.js, *.ts, *.jsx, *.vue, *.html, *.css, *.scss}]
+indent_size = 2
 
 # config for Markdown
 [*.md]
-insert_final_newline = false
 trim_trailing_whitespace = false
+insert_final_newline = false
+
+# config for JSON and YAML
+[{*.json, *.yml, *.xml}]
+indent_size = 2
