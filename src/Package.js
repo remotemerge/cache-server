@@ -34,7 +34,6 @@ let configs = {
   ],
   'engines': {
     'node': process.env.npm_package_engines_node,
-    'npm': process.env.npm_package_engines_npm,
     'yarn': process.env.npm_package_engines_yarn
   },
   'scripts': {

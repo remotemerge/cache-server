@@ -5,8 +5,11 @@ app-install-lint:
   stage: install-lint
   image: node:12.13
   before_script:
-    - yarn
+    - node --version
+    - npm --version
+    - yarn --version
   script:
+    - yarn
     - yarn lint
   artifacts:
     paths:
@@ -17,6 +20,7 @@ app-deploy:
   only:
     - master
   before_script:
+    - yarn
     - yarn package
   script:
     - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>./dist/.npmrc
