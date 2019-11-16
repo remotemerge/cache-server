@@ -1,6 +1,6 @@
 {
   "name": "@sapkotamadan/cache-server",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "The cache server is a DOM rendering engine built on Node, Express and Google Puppeteer.",
   "author": {
     "name": "Madan Sapkota",
@@ -52,6 +52,7 @@
     "@types/webpack": "^4.39.9",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.5",
     "cross-env": "^6.0.3",
     "eslint": "^6.6.0",
     "eslint-loader": "^3.0.2",

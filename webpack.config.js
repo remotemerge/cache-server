@@ -1,3 +1,4 @@
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -24,7 +25,11 @@ module.exports = (env, argv) => ({
     new webpack.BannerPlugin({
       banner: (options) => options.basename === 'app.js' ? '#!/usr/bin/env node' : '',
       raw: true
-    })
+    }),
+    // copy static files
+    new CopyPlugin([
+      {from: './README.md', to: './README.md'}
+    ])
   ],
   module: {
     noParse: /lodash/,
