@@ -23,7 +23,7 @@ app-deploy:
     - yarn
     - yarn package
   script:
-    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>./dist/.npmrc
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
     - npm publish dist
   after_script:
     - echo "The package is deployed to NPM registery!"

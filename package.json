@@ -1,6 +1,6 @@
 {
   "name": "@sapkotamadan/cache-server",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "The cache server is a DOM rendering engine built on Node, Express and Google Puppeteer.",
   "author": {
     "name": "Madan Sapkota",
