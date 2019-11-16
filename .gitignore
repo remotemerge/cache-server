@@ -54,3 +54,4 @@ ehthumbs_vista.db
 ### custom ignores
 package-lock.json
 /account.sh
+/.npmrc
