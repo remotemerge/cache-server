@@ -11,7 +11,7 @@ module.exports = (env, argv) => ({
     'app': './src/app.js'
   },
   output: {
-    path: path.resolve(__dirname, '../cache-server-shadow'),
+    path: path.resolve(__dirname, './dist'),
     publicPath: '/',
     filename: 'js/[name].js'
   },
