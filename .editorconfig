@@ -9,15 +9,17 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
 
-# config for ts, js, html and css files
-[{*.js, *.ts, *.jsx, *.vue, *.html, *.css, *.scss}]
+# config for js, html and css files
+[*.{ts, tsx, js, jsx, vue, html, css, scss}]
 indent_size = 2
+
+# config for JSON, XML, YAML
+[*.{json, xml, yml}]
+indent_size = 2
+
+[*.tsv]
+indent_style = tab
 
 # config for Markdown
 [*.md]
 trim_trailing_whitespace = false
-insert_final_newline = false
-
-# config for JSON and YAML
-[{*.json, *.yml, *.xml}]
-indent_size = 2
