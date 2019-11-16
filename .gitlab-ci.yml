@@ -1,10 +1,9 @@
 stages:
   - install-lint
-  - build-test
   - deploy
 app-install-lint:
-  image: node:10.16
   stage: install-lint
+  image: node:12.13
   before_script:
     - yarn
   script:
@@ -12,18 +11,16 @@ app-install-lint:
   artifacts:
     paths:
       - node_modules/
-app-build-test:
-  image: node:10.16
-  stage: build-test
-  only:
-    - master
-  script:
-    - yarn build
-    - yarn -v && node -v # @todo code test commands
 app-deploy:
   stage: deploy
+  image: node:12.13
   only:
     - master
+  before_script:
+    - yarn package
   script:
-    - echo "Done!" # @todo code deploy commands
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>./dist/.npmrc
+    - npm publish dist
+  after_script:
+    - echo "The package is deployed to NPM registery!"
   dependencies: []
