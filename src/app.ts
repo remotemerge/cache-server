@@ -1,6 +1,5 @@
-import * as express from 'express';
-import { Request, Response } from 'express';
-import validator from 'validator';
+import express, { Request, Response } from 'express';
+import { URL } from 'url';
 
 import { EngineConfigType } from './types';
 import cliArgs from './cli';
@@ -19,36 +18,28 @@ const configs: EngineConfigType = {
 const app = express();
 
 app.get('/v1/cache', async (req: Request, res: Response) => {
-  // set rendering url
-  if (req.query.url) {
-    configs.url = req.query.url as string;
-  } else {
+  if (!req.query.url) {
     return res.status(400).send('The rendering url is required!');
   }
 
-  // validate the URL
-  if (!validator.isURL(configs.url)) {
+  // set url for page rendering
+  configs.url = req.query.url as string;
+
+  // validate rendering url
+  try {
+    new URL(configs.url);
+  } catch {
     return res.status(400).send('The rendering url must be a valid!');
   }
 
   // set wait time
-  if (req.query.wait) {
-    configs.wait = Number(req.query.wait) || cliArgs.wait;
-  } else {
-    configs.wait = cliArgs.wait;
-  }
+  configs.wait = Number(req.query.wait) ?? cliArgs.wait;
 
-  // set headless
-  if (req.query.headless) {
-    configs.headless = req.query.headless === 'true';
-  } else {
-    configs.headless = cliArgs.headless;
-  }
+  // set headless mode
+  configs.headless = req.query.headless === 'true' ?? cliArgs.headless;
 
   // set user agent
-  if (req.query.userAgent) {
-    configs.userAgent = req.query.userAgent as string;
-  }
+  configs.userAgent = (req.query.userAgent as string) ?? configs.userAgent;
 
   // process for page rendering
   renderPage(configs)
@@ -66,7 +57,7 @@ app.get('/v1/cache', async (req: Request, res: Response) => {
 
 // handle all requests
 app.get('*', (req: Request, res: Response) => {
-  res.send('Cache server is Running!');
+  res.send('CacheServer is Running!');
 });
 
 // set port and start the server
