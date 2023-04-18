@@ -10,10 +10,10 @@ const userAgent =
 
 // set configs for page rendering
 const configs: EngineConfigType = {
-  url: '',
-  userAgent,
   headless: cliArgs.headless,
   wait: cliArgs.wait,
+  url: '',
+  userAgent,
 };
 
 // init express
@@ -35,6 +35,8 @@ app.get('/v1/cache', (req: Request, res: Response) => {
   // set wait time
   if (req.query.wait) {
     configs.wait = Number(req.query.wait) || cliArgs.wait;
+  } else {
+    configs.wait = cliArgs.wait;
   }
 
   // set headless
@@ -42,6 +44,13 @@ app.get('/v1/cache', (req: Request, res: Response) => {
     configs.headless = req.query.headless === 'true';
   } else {
     configs.headless = cliArgs.headless;
+  }
+
+  // set user agent
+  if (req.query.userAgent) {
+    configs.userAgent = (req.query.userAgent as string) || userAgent;
+  } else {
+    configs.userAgent = userAgent;
   }
 });
 
