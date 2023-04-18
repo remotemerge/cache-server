@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+import * as express from 'express';
+import { Request, Response } from 'express';
 import validator from 'validator';
 import { EngineConfigType } from './types';
 import cliArgs from './cli';
