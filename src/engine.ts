@@ -4,49 +4,66 @@ import type { EngineConfigType } from './types';
 export const renderPage = async (configs: EngineConfigType): Promise<string> => {
   // init content holder
   let html = '';
-  // init browser and page
+
+  // init browser and configure and launch
   const browser = await puppeteer.launch({
-    headless: configs.headless, // default is true
+    headless: configs.headless ?? true, // default is true
     ignoreHTTPSErrors: true, // default false
     timeout: 60000, // default to 30 seconds
     args: [
+      '--disable-background-networking',
+      '--disable-background-timer-throttling',
+      '--disable-dev-shm-usage',
+      '--disable-extensions',
+      '--disable-gpu',
       '--disable-infobars',
       '--disable-notifications',
       '--disable-remote-fonts',
+      '--disable-setuid-sandbox',
+      '--disable-software-rasterizer',
+      '--disable-sync',
       '--disable-web-security',
       '--hide-scrollbars',
       '--mute-audio',
       '--no-sandbox',
     ],
   });
+
+  // start a new page
   const page = await browser.newPage();
-  // set custom agent
+  // set custom user agent
   await page.setUserAgent(configs.userAgent);
-  await page.setViewport({ width: 1920, height: 1080 });
+  // set viewport size
+  await page.setViewport({ width: 1080, height: 1024 });
 
-  // handle the errors
-  page.on('error', (error) => {
-    return error;
+  // intercept requests
+  await page.setRequestInterception(true);
+  page.on('request', (request) => {
+    const resourceType = request.resourceType();
+
+    // resource types to abort
+    const abortResourceTypes = ['image', 'stylesheet', 'media', 'font'];
+
+    if (abortResourceTypes.includes(resourceType)) {
+      request.abort();
+    } else {
+      request.continue();
+    }
   });
 
   // handle the errors
-  page.on('pageerror', (pageerror) => {
-    return pageerror;
-  });
+  page.on('error', (error) => error);
+  page.on('pageerror', (pageerror) => pageerror);
 
   try {
-    // load page and wait for redirects
     await page.goto(configs.url, { waitUntil: 'networkidle2' });
-    await page.waitForNavigation();
-    // wait for seconds
-    // await page.waitFor(configs.wait * 1000);
-
-    // extract page content
+    await page.waitForNavigation({ timeout: configs.wait * 1000 });
     html = await page.content();
   } catch (error) {
     html = await page.content();
+  } finally {
+    await browser.close();
   }
-  // close the browser
-  await browser.close();
+
   return html;
 };
