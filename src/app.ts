@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import headless from './headless';
-import Catcher from './Catcher';
 import cli from './cli';
 
 // configs from cli
@@ -101,4 +100,4 @@ app.get('*', (req, res) => {
 
 // default port 8095
 const port = process.env.PORT || configs.port;
-app.listen(port, () => Catcher.console('Server started', `http://${configs.host}:${port}`));
+app.listen(port, () => console.log('Server started', `http://${configs.host}:${port}`));
