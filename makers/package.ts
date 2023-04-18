@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { readFileSync } from 'fs';
 import { copyFile, mkdir, writeFile } from 'fs/promises';
 import { join, resolve } from 'path';
