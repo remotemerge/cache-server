@@ -17,13 +17,13 @@ const configs: EngineConfigType = {
 // init express
 const app = express();
 
-app.get('/v1/cache', async (req: Request, res: Response) => {
+app.get('/v2/page', async (req: Request, res: Response) => {
   if (!req.query.url) {
     return res.status(400).send('The rendering url is required!');
   }
 
   // set url for page rendering
-  configs.url = req.query.url as string;
+  configs.url = decodeURIComponent(req.query.url as string);
 
   // validate rendering url
   try {
@@ -39,16 +39,12 @@ app.get('/v1/cache', async (req: Request, res: Response) => {
   configs.headless = req.query.headless === 'true' ?? cliArgs.headless;
 
   // set user agent
-  configs.userAgent = (req.query.userAgent as string) ?? configs.userAgent;
+  configs.userAgent = decodeURIComponent(req.query.userAgent as string) ?? configs.userAgent;
 
   // process for page rendering
   renderPage(configs)
-    .then((html) => {
-      return res.json({
-        status: 'ok',
-        cookies: [],
-        html,
-      });
+    .then((content) => {
+      return res.json({ content });
     })
     .catch((e) => {
       return res.status(400).send(`'Failed! Error: ${e.message || 'Unknown error has been occurred.'}`);
