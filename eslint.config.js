@@ -1,3 +1,4 @@
+import globals from 'globals';
 import tsEslintParser from '@typescript-eslint/parser';
 import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
 import jsdocEslintPlugin from 'eslint-plugin-jsdoc';
@@ -24,9 +25,7 @@ export default [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: {
-        process: 'readonly',
-      }
+      globals: { ...globals.browser, ...globals.node },
     },
   },
   {
