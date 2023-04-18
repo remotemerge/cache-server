@@ -1,103 +1,62 @@
-import express from 'express';
-import cors from 'cors';
-import headless from './headless';
-import cli from './cli';
+import express, { Request, Response } from 'express';
+import { URL } from 'url';
 
-// configs from cli
-const configs = cli.reader();
+import { EngineConfigType } from './types';
+import cliArgs from './cli';
+import { renderPage } from './engine';
 
-// configs from web request
-const runtimeConfigs = {
-  headless: configs.headless,
-  wait: configs.wait,
+// set configs for page rendering
+const configs: EngineConfigType = {
+  headless: cliArgs.headless,
+  wait: cliArgs.wait,
   url: '',
-  userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36'
+  userAgent:
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
 };
 
 // init express
 const app = express();
 
-// allow cross-origin requests
-app.use(cors({origin: true}));
-
-// request parser
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
-// default render status
-let render = false;
-
-// handle cache request
-app.all('/v1/cache', (req, res) => {
-
-  // set headless from request
-  if (req.query.headless !== undefined) {
-    runtimeConfigs.headless = (typeof Boolean(req.query.headless) === 'boolean') ? JSON.parse(req.query.headless) : configs.headless;
+app.get('/v2/page', async (req: Request, res: Response) => {
+  if (!req.query.url) {
+    return res.status(400).send('The rendering url is required!');
   }
 
-  // set wait from request
-  if (req.query.wait) {
-    runtimeConfigs.wait = !isNaN(req.query.wait) ? JSON.parse(req.query.wait) : configs.wait;
+  // set url for page rendering
+  configs.url = decodeURIComponent(req.query.url as string);
+
+  // validate rendering url
+  try {
+    new URL(configs.url);
+  } catch {
+    return res.status(400).send('The rendering url must be a valid!');
   }
 
-  // set user agent from request
-  if (req.query.userAgent) {
-    runtimeConfigs.userAgent = req.query.userAgent;
-  } else if (req.headers['user-agent']) {
-    runtimeConfigs.userAgent = req.headers['user-agent'];
-  }
+  // set wait time
+  configs.wait = Number(req.query.wait) ?? cliArgs.wait;
 
-  if (req.query.url || req.query.u) {
-    // enable rendering
-    render = true;
+  // set headless mode
+  configs.headless = req.query.headless === 'true' ?? cliArgs.headless;
 
-    // accept both url and u parameters.
-    if (req.query.url) {
-      runtimeConfigs.url = req.query.url;
-    } else {
-      runtimeConfigs.url = Buffer.from(req.query.u, 'base64').toString('ascii');
-    }
-  } else if (req.body.url || req.body.u) {
-    // enable rendering
-    render = true;
+  // set user agent
+  configs.userAgent = decodeURIComponent(req.query.userAgent as string) ?? configs.userAgent;
 
-    // accept both url and u parameters.
-    if (req.body.url) {
-      runtimeConfigs.url = req.body.url;
-    } else {
-      runtimeConfigs.url = Buffer.from(req.body.u, 'base64').toString('ascii');
-    }
-  } else {
-    res.json({
-      'status': 'failed',
-      'html': 'Invalid Url and/or params!'
+  // process for page rendering
+  renderPage(configs)
+    .then((content) => {
+      return res.json({ content });
+    })
+    .catch((e) => {
+      return res.status(400).send(`'Failed! Error: ${e.message || 'Unknown error has been occurred.'}`);
     });
-  }
-  if (render) {
-    // process the request
-    headless.render(runtimeConfigs).then((response) => {
-      res.json({
-        'status': 'ok',
-        'cookies': [],
-        'html': response
-      });
-    }).catch(() => {
-      res.json({
-        'status': 'failed',
-        'html': 'Failed to render the Url.'
-      });
-    });
-  }
 });
 
 // handle all requests
-app.get('*', (req, res) => {
-  res.send('Cache server is Running!');
+app.get('*', (req: Request, res: Response) => {
+  res.send('CacheServer is Running!');
 });
 
-// default port 8095
-const port = process.env.PORT || configs.port;
-app.listen(port, () => console.log('Server started', `http://${configs.host}:${port}`));
+// set port and start the server
+const port = process.env.PORT || cliArgs.port;
+// eslint-disable-next-line no-console
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
