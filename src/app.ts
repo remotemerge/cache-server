@@ -1,103 +1,54 @@
-import express from 'express';
-import cors from 'cors';
-import headless from './headless';
-import cli from './cli';
+import express, { Request, Response } from 'express';
+import validator from 'validator';
+import cliArgs from './cli';
 
-// configs from cli
-const configs = cli.reader();
+// set default user agent
+const userAgent =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36';
 
-// configs from web request
-const runtimeConfigs = {
-  headless: configs.headless,
-  wait: configs.wait,
+// set configs for page rendering
+const configs = {
   url: '',
-  userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36'
+  userAgent,
+  headless: cliArgs.headless,
+  wait: cliArgs.wait,
+  port: process.env.PORT || cliArgs.port,
 };
 
 // init express
 const app = express();
 
-// allow cross-origin requests
-app.use(cors({origin: true}));
-
-// request parser
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
-// default render status
-let render = false;
-
-// handle cache request
-app.all('/v1/cache', (req, res) => {
-
-  // set headless from request
-  if (req.query.headless !== undefined) {
-    runtimeConfigs.headless = (typeof Boolean(req.query.headless) === 'boolean') ? JSON.parse(req.query.headless) : configs.headless;
-  }
-
-  // set wait from request
-  if (req.query.wait) {
-    runtimeConfigs.wait = !isNaN(req.query.wait) ? JSON.parse(req.query.wait) : configs.wait;
-  }
-
-  // set user agent from request
-  if (req.query.userAgent) {
-    runtimeConfigs.userAgent = req.query.userAgent;
-  } else if (req.headers['user-agent']) {
-    runtimeConfigs.userAgent = req.headers['user-agent'];
-  }
-
-  if (req.query.url || req.query.u) {
-    // enable rendering
-    render = true;
-
-    // accept both url and u parameters.
-    if (req.query.url) {
-      runtimeConfigs.url = req.query.url;
-    } else {
-      runtimeConfigs.url = Buffer.from(req.query.u, 'base64').toString('ascii');
-    }
-  } else if (req.body.url || req.body.u) {
-    // enable rendering
-    render = true;
-
-    // accept both url and u parameters.
-    if (req.body.url) {
-      runtimeConfigs.url = req.body.url;
-    } else {
-      runtimeConfigs.url = Buffer.from(req.body.u, 'base64').toString('ascii');
-    }
+app.get('/v1/cache', (req: Request, res: Response) => {
+  // set rendering url
+  if (req.query.url) {
+    configs.url = req.query.url as string;
   } else {
-    res.json({
-      'status': 'failed',
-      'html': 'Invalid Url and/or params!'
-    });
+    return res.status(400).send('The rendering url is required!');
   }
-  if (render) {
-    // process the request
-    headless.render(runtimeConfigs).then((response) => {
-      res.json({
-        'status': 'ok',
-        'cookies': [],
-        'html': response
-      });
-    }).catch(() => {
-      res.json({
-        'status': 'failed',
-        'html': 'Failed to render the Url.'
-      });
-    });
+
+  // validate the URL
+  if (!validator.isURL(configs.url)) {
+    return res.status(400).send('The rendering url must be a valid!');
+  }
+
+  // set wait time
+  if (req.query.wait) {
+    configs.wait = Number(req.query.wait) || cliArgs.wait;
+  }
+
+  // set headless
+  if (req.query.headless) {
+    configs.headless = req.query.headless === 'true';
+  } else {
+    configs.headless = cliArgs.headless;
   }
 });
 
 // handle all requests
-app.get('*', (req, res) => {
+app.get('*', (req: Request, res: Response) => {
   res.send('Cache server is Running!');
 });
 
-// default port 8095
-const port = process.env.PORT || configs.port;
-app.listen(port, () => console.log('Server started', `http://${configs.host}:${port}`));
+// start the server
+// eslint-disable-next-line no-console
+app.listen(configs.port, () => console.log(`App listening at http://localhost:${configs.port}`));
