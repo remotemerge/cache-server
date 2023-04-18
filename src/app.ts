@@ -6,16 +6,13 @@ import { EngineConfigType } from './types';
 import cliArgs from './cli';
 import { renderPage } from './engine';
 
-// set default user agent
-const userAgent =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36';
-
 // set configs for page rendering
 const configs: EngineConfigType = {
   headless: cliArgs.headless,
   wait: cliArgs.wait,
   url: '',
-  userAgent,
+  userAgent:
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
 };
 
 // init express
@@ -50,9 +47,7 @@ app.get('/v1/cache', async (req: Request, res: Response) => {
 
   // set user agent
   if (req.query.userAgent) {
-    configs.userAgent = (req.query.userAgent as string) || userAgent;
-  } else {
-    configs.userAgent = userAgent;
+    configs.userAgent = req.query.userAgent as string;
   }
 
   // process for page rendering
