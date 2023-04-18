@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
+import { readFileSync } from 'fs';
 import { copyFile, mkdir, writeFile } from 'fs/promises';
 import { join, resolve } from 'path';
 
 // use vars from package config
-import pc from './../package.json' assert { type: 'json' };
+const pc = JSON.parse(readFileSync(`${resolve()}/package.json`, 'utf8'));
 
 // configs for npm deployment
 const configs = {
