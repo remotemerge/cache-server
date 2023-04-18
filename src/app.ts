@@ -1,8 +1,10 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
 import validator from 'validator';
+
 import { EngineConfigType } from './types';
 import cliArgs from './cli';
+import { renderPage } from './engine';
 
 // set default user agent
 const userAgent =
@@ -19,7 +21,7 @@ const configs: EngineConfigType = {
 // init express
 const app = express();
 
-app.get('/v1/cache', (req: Request, res: Response) => {
+app.get('/v1/cache', async (req: Request, res: Response) => {
   // set rendering url
   if (req.query.url) {
     configs.url = req.query.url as string;
@@ -52,6 +54,19 @@ app.get('/v1/cache', (req: Request, res: Response) => {
   } else {
     configs.userAgent = userAgent;
   }
+
+  // process for page rendering
+  renderPage(configs)
+    .then((html) => {
+      return res.json({
+        status: 'ok',
+        cookies: [],
+        html,
+      });
+    })
+    .catch((e) => {
+      return res.status(400).send(`'Failed! Error: ${e.message || 'Unknown error has been occurred.'}`);
+    });
 });
 
 // handle all requests
