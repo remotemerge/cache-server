@@ -1,14 +1,7 @@
-import type { CliConfig } from './types';
+import type { CliConfigType } from './types';
 import { argv } from 'process';
 
-/**
- * Set the default CLI arguments values
- * @property {string} host - The host to listen on
- * @property {number} port - The port to listen on
- * @property {number} wait - The wait time in seconds
- * @property {boolean} headless - The headless mode flag (true/false)
- */
-const cliArgs: CliConfig = {
+const cliArgs: CliConfigType = {
   host: 'localhost',
   port: 8080,
   wait: 1, // wait for 1 second

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import validator from 'validator';
+import { EngineConfigType } from './types';
 import cliArgs from './cli';
 
 // set default user agent
@@ -7,7 +8,7 @@ const userAgent =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36';
 
 // set configs for page rendering
-const configs = {
+const configs: EngineConfigType = {
   url: '',
   userAgent,
   headless: cliArgs.headless,

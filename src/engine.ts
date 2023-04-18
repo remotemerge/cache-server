@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
-import type { HeadlessConfig } from './types';
+import type { EngineConfigType } from './types';
 
-export const renderPage = async (configs: HeadlessConfig): Promise<string> => {
+export const renderPage = async (configs: EngineConfigType): Promise<string> => {
   // init content holder
   let html = '';
   // init browser and page
