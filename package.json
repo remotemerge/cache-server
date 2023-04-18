@@ -26,8 +26,7 @@
     "linux"
   ],
   "engines": {
-    "node": ">=8.16",
-    "yarn": ">=1.19"
+    "node": ">=8.16"
   },
   "node_version": "8.16",
   "scripts": {
@@ -36,7 +35,7 @@
     "lint": "cross-env NODE_ENV=production eslint --ext .js,.vue,.jsx src",
     "lint:fix": "eslint --ext .js,.vue,.jsx --fix src",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --progress --hide-modules",
-    "package": "yarn lint && yarn build && node ./src/Package.js"
+    "package": "npm run lint && npm run build && node ./src/Package.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
