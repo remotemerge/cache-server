@@ -1,3 +1,5 @@
-dist
-node_modules
-test
+/.github/
+/.idea/
+/__tests__/
+/dist/
+/node_modules/
