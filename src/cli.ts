@@ -1,5 +1,4 @@
 import type { CliConfigType } from './types';
-import { argv } from 'process';
 
 const cliArgs: CliConfigType = {
   host: 'localhost',
@@ -8,7 +7,11 @@ const cliArgs: CliConfigType = {
   headless: false,
 };
 
-for (const arg of argv.slice(2)) {
+// extract args
+const args = process.argv.slice(2);
+
+// set cli args in the config
+for (const arg of args) {
   const match = arg.match(/--(?<key>[a-z]+)=(?<value>\w+)/i);
   if (match && match.groups) {
     const { key, value } = match.groups;
@@ -28,4 +31,6 @@ for (const arg of argv.slice(2)) {
     }
   }
 }
+
+// export the cli args
 export default cliArgs;
