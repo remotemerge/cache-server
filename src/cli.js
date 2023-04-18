@@ -1,7 +1,7 @@
 export default {
   reader() {
     // base configs
-    let configs = {
+    const configs = {
       host: 'localhost',
       port: 8095,
       wait: 1, // wait for 1 second

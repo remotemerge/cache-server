@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // configs for npm deployment
-let configs = {
+const configs = {
   'name': process.env.npm_package_name,
   'version': process.env.npm_package_version,
   'description': process.env.npm_package_description,

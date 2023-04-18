@@ -22,7 +22,7 @@ const app = express();
 app.use(cors({origin: true}));
 
 // request parser
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
