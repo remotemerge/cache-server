@@ -1,47 +1,31 @@
-export default {
-  reader() {
-    // base configs
-    const configs = {
-      host: 'localhost',
-      port: 8095,
-      wait: 1, // wait for 1 second
-      headless: false
-    };
+import { argv } from 'process';
+import type { CliConfig } from './types';
 
-    // regex match holder
-    let match;
-    // pattern to match params
-    const regex = /--(\w+)=([0-9a-zA-Z.]+)/gmi;
-
-    // read the command arguments
-    const [, , ...args] = process.argv;
-
-    const validate = (param, val) => {
-
-      // validate numbers
-      if (param === 'wait' || param === 'port') {
-        if (!isNaN(val)) {
-          return JSON.parse(val);
-        }
-        return configs[param];
-      }
-
-      // validate booleans
-      if (param === 'headless') {
-        if (typeof Boolean(val) === 'boolean') {
-          return JSON.parse(val);
-        }
-        return configs[param];
-      }
-      return val;
-    };
-
-    while ((match = regex.exec(args)) !== null) {
-      // overwrite the defaults
-      if (configs[match[1]] !== undefined) {
-        configs[match[1]] = validate(match[1], match[2]);
-      }
-    }
-    return configs;
-  }
+const cliArgs: CliConfig = {
+  host: 'localhost',
+  port: 8095,
+  wait: 1, // wait for 1 second
+  headless: false,
 };
+
+for (const arg of argv.slice(2)) {
+  const match = arg.match(/--(?<key>[a-z]+)=(?<value>\w+)/i);
+  if (match && match.groups) {
+    const { key, value } = match.groups;
+    switch (key) {
+      case 'host':
+        cliArgs.host = value;
+        break;
+      case 'port':
+        cliArgs.port = Number(value);
+        break;
+      case 'wait':
+        cliArgs.wait = Number(value);
+        break;
+      case 'headless':
+        cliArgs.headless = value === 'true';
+        break;
+    }
+  }
+}
+export default cliArgs;
