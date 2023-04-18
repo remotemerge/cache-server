@@ -12,7 +12,6 @@ const configs = {
   userAgent,
   headless: cliArgs.headless,
   wait: cliArgs.wait,
-  port: process.env.PORT || cliArgs.port,
 };
 
 // init express
@@ -49,6 +48,7 @@ app.get('*', (req: Request, res: Response) => {
   res.send('Cache server is Running!');
 });
 
-// start the server
+// set port and start the server
+const port = process.env.PORT || cliArgs.port;
 // eslint-disable-next-line no-console
-app.listen(configs.port, () => console.log(`App listening at http://localhost:${configs.port}`));
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
