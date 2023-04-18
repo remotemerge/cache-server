@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     rollupOptions: {
-      external: ['body-parser', 'cors', 'express', 'puppeteer'],
+      external: ['express', 'puppeteer', 'validator'],
       input: {
         app: '/src/app.ts',
       },
