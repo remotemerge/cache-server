@@ -5,7 +5,9 @@
 ![Downloads](https://img.shields.io/npm/dt/@sapkotamadan/cache-server)
 ![License](https://img.shields.io/npm/l/@sapkotamadan/cache-server)
 
-CacheServer is a tool designed to provide an efficient and streamlined method for extracting web page content. By offering an API that returns the HTML source code of webpages, CacheServer enables users to perform various automated tasks, such as web page extraction, data mining, and content analysis, etc.
+CacheServer offers a user-friendly API for loading web pages and returning their HTML source code. In addition, it simplifies automated tasks like web page extraction, data mining, and content analysis by leveraging the power of Puppeteer, a headless browser automation tool.
+
+With a customizable configuration and easy-to-use parameters, CacheServer is the ideal solution for developers looking to enhance their web scraping and data extraction processes.
 
 ### System Requirements
 
