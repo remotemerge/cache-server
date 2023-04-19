@@ -5,7 +5,7 @@
 ![Downloads](https://img.shields.io/npm/dt/@sapkotamadan/cache-server)
 ![License](https://img.shields.io/npm/l/@remotemerge/cache-server)
 
-CacheServer offers an API for loading webpages and returning their HTML source code. Utilizing Puppeteer behind the scenes, it launches a headless browser to fetch the content. The CacheServer API streamlines various automated tasks, such as web page extraction, data mining, and content analysis, by providing a seamless and efficient interface.
+CacheServer is a tool designed to provide an efficient and streamlined method for extracting web page content. By offering an API that returns the HTML source code of webpages, CacheServer enables users to perform various automated tasks, such as web page extraction, data mining, and content analysis, etc.
 
 ### System Requirements
 
@@ -39,7 +39,7 @@ By default, the server will be accessible at `http://localhost:8080`. You can cu
 
 `--wait`: Define the maximum wait time in seconds after the page has loaded. The default is `1` second.
 
-`--headless`: Launch the Chromium browser in headless mode. The default is `true`; set to `false` for non-headless mode.
+`--headless`: Launch the Chromium browser in headless mode. The default is `true`; set to `false` to run the browser in non-headless mode, with a visible window.
 
 For example, to run CacheServer with the customized settings, use the command like below:
 
@@ -61,7 +61,7 @@ http://localhost:8095/v1/cache?url=...&userAgent=...&wait=...&headless=...
 
 `userAgent`: (Optional) The user agent to be used for the request. If not specified, the default user agent will be used.
 
-The `wait` and `headless` parameters function the same as in the server configuration and are optional for the request. Specify these parameters if they differ from the server settings.
+The `wait` and `headless` parameters function the same as in the server configuration and are optional for the request. Specify these parameters if you want to override the server settings for a particular request.
 
 #### Response:
 
