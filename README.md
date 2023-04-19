@@ -9,7 +9,7 @@ CacheServer is a tool designed to provide an efficient and streamlined method fo
 
 ### System Requirements
 
-CacheServer is compatible with Node.js v8 and above, although using the latest version of Node.js is highly recommended to ensure access to all features and optimal performance.
+CacheServer is compatible with Node.js v14 and above, although using the latest version of Node.js is highly recommended to ensure access to all features and optimal performance.
 
 **Note:** Ensure that Node.js is properly installed and accessible in system PATH.
 
