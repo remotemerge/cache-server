@@ -7,7 +7,7 @@ const pc = JSON.parse(readFileSync(`${resolve()}/package.json`, 'utf8'));
 
 // configs for npm deployment
 const configs = {
-  name: '@sapkotamadan/cache-server',
+  name: pc.name,
   version: pc.version,
   description: pc.description,
   private: pc.private,
