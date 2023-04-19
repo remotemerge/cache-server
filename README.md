@@ -54,7 +54,7 @@ cache-server --host=localhost --port=8095 --wait=5 --headless=false
 To extract a web page using the CacheServer API, send the following GET request:
 
 ```
-http://localhost:8095/v1/cache?url=...&userAgent=...&wait=...&headless=...
+http://localhost:8095/v2/page?url=...&userAgent=...&wait=...&headless=...
 ```
 
 #### Parameters:
