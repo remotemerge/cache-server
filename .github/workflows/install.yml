@@ -1,0 +1,38 @@
+# The workflow to install the package
+name: Install
+
+# Controls when the workflow will run
+on:
+  workflow_run:
+    workflows: [ "Production" ]
+    types:
+      - completed
+
+jobs:
+  install:
+    # The matrix of OS and Node.js versions
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        node: [ 14, 16, 18, 'current' ]
+
+    # The type of runner that the job will run on
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: "Use specified Node.js version"
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: "Print version"
+        run: node -v && npm -v
+
+      - name: "Init package config"
+        run: npm init -y
+
+      - name: "Install CacheServer package"
+        run: npm i @sapkotamadan/cache-server
+
+      - name: "List installed packages"
+        run: npm list --depth=0
