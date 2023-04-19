@@ -23,28 +23,29 @@ npm i -g @sapkotamadan/cache-server
 
 This command will globally install the CacheServer package, making it available for use across your system.
 
-<h2>Start Server</h2>
-<p>Run the command from command line tools like <a href="https://git-scm.com/downloads" target"_blank">Git Bash</a>, <a href="http://cmder.net/" target="_blank">Cmder</a> and/or terminal, cmd ... etc.</p>
+### Start CacheServer:
+
+To start CacheServer, execute the following command in your terminal:
 
 ```bash
 cache-server
 ```
 
-<p>The cache server starts on <a href="#">http://localhost:8095</a> by default. Few optional parameters are supported.</p>
+By default, the server will be accessible at `http://localhost:8080`. You can customize the configuration using optional parameters:
+
+`--host`: Set the host, such as `localhost` or `127.0.0.1`. The default is `localhost`.
+
+`--port`: Specify an available port, like `8080` or `8095`. The default is `8080`.
+
+`--wait`: Define the maximum wait time in seconds after the page has loaded. The default is `1` second.
+
+`--headless`: Launch the Chromium browser in headless mode. The default is `true`; set to `false` for non-headless mode.
+
+For example, to run CacheServer with the customized settings, use the command like below:
 
 ```bash
-cache-server --host=localhost --port=8095 --wait=1 --headless=false
+cache-server --host=localhost --port=8095 --wait=5 --headless=false
 ```
-
-<h5>params defination</h5>
-
-```--host``` The computer address *localhost*, *127.0.0.1* etc.
-
-```--port``` The unused port *8080*, *8095* ... etc.
-
-```--wait``` The maximum time to wait in seconds after the page is rendered, default is *1* second.
-
-```--headless``` Starts on non-headless mode by default and launch the chromium web browser. Change the value to *true* to run in headless mode.
 
 <h2>Usage</h2>
 
