@@ -47,26 +47,28 @@ For example, to run CacheServer with the customized settings, use the command li
 cache-server --host=localhost --port=8095 --wait=5 --headless=false
 ```
 
-<h2>Usage</h2>
+### Web Page Extraction
 
-<p>Make a GET request on the cache server.</p>
+To extract a web page using the CacheServer API, send the following GET request:
 
 ```
-http://localhost:8095/v1/cache?url=[remote url]&wait=[time in seconds]&headless=[true|false]
+http://localhost:8095/v1/cache?url=...&userAgent=...&wait=...&headless=...
 ```
 
-<h5>request specific params</h5>
+#### Parameters:
 
-```url``` Required. The remote url to be rendered.
+`url`: (Required) The URL of the web page to be extracted.
 
-```u``` alias of *url*. Required if *url* is absent, remote url must be Base64 encoded.
+`userAgent`: (Optional) The user agent to be used for the request. If not specified, the default user agent will be used.
 
-```wait``` and ```headless``` Optional. Works same as server params.
+The `wait` and `headless` parameters function the same as in the server configuration and are optional for the request. Specify these parameters if they differ from the server settings.
 
-<h1>Roadmap</h1>
-<ul>
-  <li>Support proxy and/or IP rotation.</li>
-  <li>Render the image.</li>
-  <li>Render the PDF.</li>
-  <li>The height of sky is ∞ miles.</li>
-</li>
+#### Response:
+
+The response will be a JSON object with the following properties:
+
+```json
+{
+  "content": "<!DOCTYPE html><html...</html>"
+}
+```
