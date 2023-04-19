@@ -28,13 +28,3 @@ jobs:
       - run: npm publish ./dist --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
-      # publish to GitHub
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@remotemerge'
-      - run: npm publish ./dist
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
