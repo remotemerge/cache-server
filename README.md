@@ -3,7 +3,7 @@
 [![Package](https://img.shields.io/npm/v/@sapkotamadan/cache-server?logo=npm)](https://www.npmjs.com/package/@sapkotamadan/cache-server)
 ![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/cache-server/production.yml?logo=github)
 ![Downloads](https://img.shields.io/npm/dt/@sapkotamadan/cache-server)
-![License](https://img.shields.io/npm/l/@remotemerge/cache-server)
+![License](https://img.shields.io/npm/l/@sapkotamadan/cache-server)
 
 CacheServer is a tool designed to provide an efficient and streamlined method for extracting web page content. By offering an API that returns the HTML source code of webpages, CacheServer enables users to perform various automated tasks, such as web page extraction, data mining, and content analysis, etc.
 
