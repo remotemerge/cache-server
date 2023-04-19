@@ -36,7 +36,7 @@ app.get('/v2/page', async (req: Request, res: Response) => {
   configs.wait = Number(req.query.wait) ?? cliArgs.wait;
 
   // set headless mode
-  configs.headless = req.query.headless === 'true' ?? cliArgs.headless;
+  configs.headless = req.query.headless !== undefined ? req.query.headless === 'true' : cliArgs.headless;
 
   // set user agent
   configs.userAgent = decodeURIComponent(req.query.userAgent as string) ?? configs.userAgent;

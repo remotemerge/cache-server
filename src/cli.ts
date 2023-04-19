@@ -4,7 +4,7 @@ const cliArgs: CliConfigType = {
   host: 'localhost',
   port: 8080,
   wait: 1, // wait for 1 second
-  headless: false,
+  headless: true,
 };
 
 // extract args
