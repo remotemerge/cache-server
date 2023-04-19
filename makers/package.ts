@@ -7,15 +7,33 @@ const pc = JSON.parse(readFileSync(`${resolve()}/package.json`, 'utf8'));
 
 // configs for npm deployment
 const configs = {
-  name: '@sapkotamadan/cache-server',
+  name: pc.name,
   version: pc.version,
   description: pc.description,
   private: pc.private,
   license: pc.license,
   author: pc.author,
+  keywords: [
+    'API',
+    'automation',
+    'cache-server',
+    'content-analysis',
+    'data-mining',
+    'headless-browser',
+    'html-source',
+    'page-render',
+    'puppeteer',
+    'web-crawler',
+    'web-fetcher',
+    'web-page-extractor',
+    'web-scraping',
+  ],
   repository: pc.repository,
   bugs: pc.bugs,
-  keywords: ['cache', 'headless', 'puppeteer', 'server', 'stdlib', 'util'],
+  engines: {
+    node: '>=14',
+  },
+  type: pc.type,
   main: 'js/app.js',
   scripts: {
     start: 'node .',

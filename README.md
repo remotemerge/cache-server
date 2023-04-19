@@ -1,60 +1,76 @@
-<h1>Cache Server - The DOM rendering engine.</h1>
-<h2>What is cache server?</h2>
-<p>The cache server is a DOM rendering engine built on Node, Express and Google Puppeteer. This package utilizes the chrome DevTools protocol to render the dynamic web pages. It returns rendered HTML to the caller.</p>
+# CacheServer - Efficient Web Page Extractor
 
-<h2>Requirements</h2>
-<p>The cache server works best on the latest versions of Node and NPM. The minimum requirements are:</p>
-<p>
-  <a href="https://nodejs.org/en/download"><img src="https://img.shields.io/badge/node-%3E=8.16-brightgreen.svg?style=for-the-badge" alt="node"></a>
-  <a href="https://www.npmjs.com/get-npm"><img src="https://img.shields.io/badge/yarn-%3E=1.19-brightgreen.svg?style=for-the-badge" alt="npm"></a>
-</p>
-<i>*.* make sure node and npm are available in PATH environment variable. *.*</i>
-<h2>Installation</h2>
+[![Package](https://img.shields.io/npm/v/@sapkotamadan/cache-server?logo=npm)](https://www.npmjs.com/package/@sapkotamadan/cache-server)
+![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/cache-server/production.yml?logo=github)
+![Downloads](https://img.shields.io/npm/dt/@sapkotamadan/cache-server)
+![License](https://img.shields.io/npm/l/@sapkotamadan/cache-server)
+
+CacheServer offers a user-friendly API for loading web pages and returning their HTML source code. In addition, it simplifies automated tasks like web page extraction, data mining, and content analysis by leveraging the power of Puppeteer, a headless browser automation tool.
+
+With a customizable configuration and easy-to-use parameters, CacheServer is the ideal solution for developers looking to enhance their web scraping and data extraction processes.
+
+### System Requirements
+
+CacheServer is compatible with Node.js v14 and above, although using the latest version of Node.js is highly recommended to ensure access to all features and optimal performance.
+
+**Note:** Ensure that Node.js is properly installed and accessible in system PATH.
+
+### Installation
+
+To install CacheServer, run the following command in your terminal:
 
 ```bash
-npm i @sapkotamadan/cache-server -g
+npm i -g @sapkotamadan/cache-server
 ```
 
-<h2>Start Server</h2>
-<p>Run the command from command line tools like <a href="https://git-scm.com/downloads" target"_blank">Git Bash</a>, <a href="http://cmder.net/" target="_blank">Cmder</a> and/or terminal, cmd ... etc.</p>
+This command will globally install the CacheServer package, making it available for use across your system.
+
+### Start CacheServer:
+
+To start CacheServer, execute the following command in your terminal:
 
 ```bash
 cache-server
 ```
-<p>The cache server starts on <a href="#">http://localhost:8095</a> by default. Few optional parameters are supported.</p>
+
+By default, the server will be accessible at `http://localhost:8080`. You can customize the configuration using optional parameters:
+
+`--host`: Set the host, such as `localhost` or `127.0.0.1`. The default is `localhost`.
+
+`--port`: Specify an available port, like `8080` or `8095`. The default is `8080`.
+
+`--wait`: Define the maximum wait time in seconds after the page has loaded. The default is `1` second.
+
+`--headless`: Launch the Chromium browser in headless mode. The default is `true`; set to `false` to run the browser in non-headless mode, with a visible window.
+
+For example, to run CacheServer with the customized settings, use the command like below:
 
 ```bash
-cache-server --host=localhost --port=8095 --wait=1 --headless=false
+cache-server --host=localhost --port=8095 --wait=5 --headless=false
 ```
-<h5>params defination</h5>
 
-```--host``` The computer address *localhost*, *127.0.0.1* etc.
+### Web Page Extraction
 
-```--port``` The unused port *8080*, *8095* ... etc.
-
-```--wait``` The maximum time to wait in seconds after the page is rendered, default is *1* second.
-
-```--headless``` Starts on non-headless mode by default and launch the chromium web browser. Change the value to *true* to run in headless mode.
-
-<h2>Usage</h2>
-
-<p>Make a GET request on the cache server.</p>
+To extract a web page using the CacheServer API, send the following GET request:
 
 ```
-http://localhost:8095/v1/cache?url=[remote url]&wait=[time in seconds]&headless=[true|false]
+http://localhost:8095/v1/cache?url=...&userAgent=...&wait=...&headless=...
 ```
-<h5>request specific params</h5>
 
-```url``` Required. The remote url to be rendered.
+#### Parameters:
 
-```u``` alias of *url*. Required if *url* is absent, remote url must be Base64 encoded. 
+`url`: (Required) The URL of the web page to be extracted.
 
-```wait``` and ```headless``` Optional. Works same as server params.
+`userAgent`: (Optional) The user agent to be used for the request. If not specified, the default user agent will be used.
 
-<h1>Roadmap</h1>
-<ul>
-  <li>Support proxy and/or IP rotation.</li>
-  <li>Render the image.</li>
-  <li>Render the PDF.</li>
-  <li>The height of sky is ∞ miles.</li>
-</li>
+The `wait` and `headless` parameters function the same as in the server configuration and are optional for the request. Specify these parameters if you want to override the server settings for a particular request.
+
+#### Response:
+
+The response will be a JSON object with the following properties:
+
+```json
+{
+  "content": "<!DOCTYPE html><html...</html>"
+}
+```
