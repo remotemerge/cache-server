@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 'lts/*'
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@sapkotamadan'
+          scope: '@remotemerge'
       - run: npm publish ./dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
