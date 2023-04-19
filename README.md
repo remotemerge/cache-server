@@ -7,18 +7,21 @@
 
 CacheServer offers an API for loading webpages and returning their HTML source code. Utilizing Puppeteer behind the scenes, it launches a headless browser to fetch the content. The CacheServer API streamlines various automated tasks, such as web page extraction, data mining, and content analysis, by providing a seamless and efficient interface.
 
-<h2>Requirements</h2>
-<p>The cache server works best on the latest versions of Node and NPM. The minimum requirements are:</p>
-<p>
-  <a href="https://nodejs.org/en/download"><img src="https://img.shields.io/badge/node-%3E=8.16-brightgreen.svg?style=for-the-badge" alt="node"></a>
-  <a href="https://www.npmjs.com/get-npm"><img src="https://img.shields.io/badge/yarn-%3E=1.19-brightgreen.svg?style=for-the-badge" alt="npm"></a>
-</p>
-<i>*.* make sure node and npm are available in PATH environment variable. *.*</i>
-<h2>Installation</h2>
+### System Requirements
+
+CacheServer is compatible with Node.js v8 and above, although using the latest version of Node.js is highly recommended to ensure access to all features and optimal performance.
+
+**Note:** Ensure that Node.js is properly installed and accessible in system PATH.
+
+### Installation
+
+To install CacheServer, run the following command in your terminal:
 
 ```bash
-npm i @sapkotamadan/cache-server -g
+npm i -g @sapkotamadan/cache-server
 ```
+
+This command will globally install the CacheServer package, making it available for use across your system.
 
 <h2>Start Server</h2>
 <p>Run the command from command line tools like <a href="https://git-scm.com/downloads" target"_blank">Git Bash</a>, <a href="http://cmder.net/" target="_blank">Cmder</a> and/or terminal, cmd ... etc.</p>
