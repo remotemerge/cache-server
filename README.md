@@ -1,6 +1,11 @@
-<h1>Cache Server - The DOM rendering engine.</h1>
-<h2>What is cache server?</h2>
-<p>The cache server is a DOM rendering engine built on Node, Express and Google Puppeteer. This package utilizes the chrome DevTools protocol to render the dynamic web pages. It returns rendered HTML to the caller.</p>
+# CacheServer - Efficient Web Page Extractor
+
+[![Package](https://img.shields.io/npm/v/@sapkotamadan/cache-server?logo=npm)](https://www.npmjs.com/package/@sapkotamadan/cache-server)
+![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/cache-server/production.yml?logo=github)
+![Downloads](https://img.shields.io/npm/dt/@sapkotamadan/cache-server)
+![License](https://img.shields.io/npm/l/@remotemerge/cache-server)
+
+CacheServer offers an API for loading webpages and returning their HTML source code. Utilizing Puppeteer behind the scenes, it launches a headless browser to fetch the content. The CacheServer API streamlines various automated tasks, such as web page extraction, data mining, and content analysis, by providing a seamless and efficient interface.
 
 <h2>Requirements</h2>
 <p>The cache server works best on the latest versions of Node and NPM. The minimum requirements are:</p>
@@ -21,11 +26,13 @@ npm i @sapkotamadan/cache-server -g
 ```bash
 cache-server
 ```
+
 <p>The cache server starts on <a href="#">http://localhost:8095</a> by default. Few optional parameters are supported.</p>
 
 ```bash
 cache-server --host=localhost --port=8095 --wait=1 --headless=false
 ```
+
 <h5>params defination</h5>
 
 ```--host``` The computer address *localhost*, *127.0.0.1* etc.
@@ -43,11 +50,12 @@ cache-server --host=localhost --port=8095 --wait=1 --headless=false
 ```
 http://localhost:8095/v1/cache?url=[remote url]&wait=[time in seconds]&headless=[true|false]
 ```
+
 <h5>request specific params</h5>
 
 ```url``` Required. The remote url to be rendered.
 
-```u``` alias of *url*. Required if *url* is absent, remote url must be Base64 encoded. 
+```u``` alias of *url*. Required if *url* is absent, remote url must be Base64 encoded.
 
 ```wait``` and ```headless``` Optional. Works same as server params.
 
