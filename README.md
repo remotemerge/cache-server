@@ -1,4 +1,4 @@
-![CacheServer - Efficient Web Page Extractor](/public/assets/cache-server-daigram.png)
+![CacheServer - Efficient Web Page Extractor](/public/assets/cache-server-diagram.png)
 
 [![Package](https://img.shields.io/npm/v/@sapkotamadan/cache-server?logo=npm)](https://www.npmjs.com/package/@sapkotamadan/cache-server)
 ![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/cache-server/production.yml?logo=github)
