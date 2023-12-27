@@ -27,7 +27,8 @@
   "scripts": {
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "build": "vite build && ts-node --esm --files makers/package.ts",
+    "format": "prettier --write src",
+    "build": "vite build && tsx ./makers/package.ts",
     "cache-server": "npm run build && node dist/js/app.js"
   },
   "dependencies": {
@@ -43,8 +44,8 @@
     "eslint": "^8.56.0",
     "eslint-plugin-jsdoc": "^46.9.1",
     "globals": "^13.24.0",
-    "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
+    "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.10"
   },
