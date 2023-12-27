@@ -21,11 +21,7 @@
     "node": ">=18.16"
   },
   "prettier": {
-    "bracketSameLine": true,
-    "printWidth": 120,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
+    "singleQuote": true
   },
   "type": "module",
   "scripts": {
