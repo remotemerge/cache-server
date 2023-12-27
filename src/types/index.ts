@@ -4,7 +4,7 @@
  * @property {number} wait - Time to wait before rendering the page
  */
 type CommonConfigType = {
-  headless: boolean;
+  headless: boolean | string;
   wait: number;
 };
 

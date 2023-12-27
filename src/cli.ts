@@ -4,7 +4,7 @@ const cliArgs: CliConfigType = {
   host: 'localhost',
   port: 8080,
   wait: 1, // wait for 1 second
-  headless: true,
+  headless: 'new',
 };
 
 // extract args
@@ -26,7 +26,7 @@ for (const arg of args) {
         cliArgs.wait = Number(value);
         break;
       case 'headless':
-        cliArgs.headless = value === 'true';
+        cliArgs.headless = ['true', 'new'].includes(value) ? value : false;
         break;
     }
   }
