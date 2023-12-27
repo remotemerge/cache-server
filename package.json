@@ -27,7 +27,7 @@
   "scripts": {
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "format": "prettier --write src/**/*.ts makers/**/*.ts",
+    "format": "prettier --write **/*.ts **/**/*.ts",
     "build": "vite build && tsx ./makers/package.ts",
     "cache-server": "npm run build && node dist/js/app.js"
   },
