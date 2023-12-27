@@ -1,14 +1,18 @@
+# This workflow is triggered when the Production workflow is completed.
 name: "Install"
+
+# Controls when the workflow will run
 on:
   workflow_run:
     workflows: [ "Production" ]
     types: [ 'completed' ]
+
 jobs:
   install:
     strategy:
       matrix:
         # Test against different operating systems
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        os: [ ubuntu-22.04, ubuntu-20.04, ubuntu-18.04, ubuntu-16.04, macos-latest, windows-latest ]
         # Test against different Node.js versions
         node: [ 14, 16, 18, 20, 'current' ]
 
