@@ -12,7 +12,9 @@ jobs:
     strategy:
       matrix:
         # Test against different operating systems
-        os: [ ubuntu-22.04, ubuntu-20.04, ubuntu-18.04, ubuntu-16.04, macos-latest, windows-latest ]
+        # Runners: https://github.com/actions/runner-images
+        os: [ ubuntu-20.04, ubuntu-22.04, windows-2019, windows-2022, macos-11, macos-12, macos-13 ]
+
         # Test against different Node.js versions
         node: [ 14, 16, 18, 20, 'current' ]
 
