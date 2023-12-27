@@ -9,7 +9,7 @@ export const renderPage = async (
 
   // init browser and configure and launch
   const browser = await puppeteer.launch({
-    headless: configs.headless ?? true, // default is true
+    headless: configs.headless ?? 'new', // default is new
     ignoreHTTPSErrors: true, // default false
     timeout: 60000, // default to 30 seconds
     args: [
