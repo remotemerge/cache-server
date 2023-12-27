@@ -24,8 +24,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
 
       - name: "Initialize package configuration"
         run: npm init -y
