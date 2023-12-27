@@ -1,7 +1,9 @@
 import puppeteer from 'puppeteer';
 import type { EngineConfigType } from './types';
 
-export const renderPage = async (configs: EngineConfigType): Promise<string> => {
+export const renderPage = async (
+  configs: EngineConfigType,
+): Promise<string> => {
   // init content holder
   let html = '';
 

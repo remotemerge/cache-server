@@ -51,7 +51,11 @@ const configs = {
 // generate package.json in dist
 const publicPath = join(resolve(), 'dist');
 await mkdir(publicPath, { recursive: true });
-await writeFile(join(publicPath, 'package.json'), JSON.stringify(configs), 'utf-8');
+await writeFile(
+  join(publicPath, 'package.json'),
+  JSON.stringify(configs),
+  'utf-8',
+);
 
 // copy README.md to dist
 await copyFile('README.md', `${publicPath}/README.md`);

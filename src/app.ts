@@ -11,7 +11,7 @@ const configs: EngineConfigType = {
   wait: cliArgs.wait,
   url: '',
   userAgent:
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
 };
 
 // init express
@@ -36,10 +36,14 @@ app.get('/v2/page', async (req: Request, res: Response) => {
   configs.wait = Number(req.query.wait) ?? cliArgs.wait;
 
   // set headless mode
-  configs.headless = req.query.headless !== undefined ? req.query.headless === 'true' : cliArgs.headless;
+  configs.headless =
+    req.query.headless !== undefined
+      ? req.query.headless === 'true'
+      : cliArgs.headless;
 
   // set user agent
-  configs.userAgent = decodeURIComponent(req.query.userAgent as string) ?? configs.userAgent;
+  configs.userAgent =
+    decodeURIComponent(req.query.userAgent as string) ?? configs.userAgent;
 
   // process for page rendering
   renderPage(configs)
@@ -47,7 +51,11 @@ app.get('/v2/page', async (req: Request, res: Response) => {
       return res.json({ content });
     })
     .catch((e) => {
-      return res.status(400).send(`'Failed! Error: ${e.message || 'Unknown error has been occurred.'}`);
+      return res
+        .status(400)
+        .send(
+          `'Failed! Error: ${e.message || 'Unknown error has been occurred.'}`,
+        );
     });
 });
 
@@ -58,5 +66,7 @@ app.get('*', (req: Request, res: Response) => {
 
 // set port and start the server
 const port = process.env.PORT || cliArgs.port;
-// eslint-disable-next-line no-console
-app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
+app.listen(port, () =>
+  // eslint-disable-next-line no-console
+  console.log(`App listening at http://localhost:${port}`),
+);
