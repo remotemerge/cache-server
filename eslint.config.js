@@ -1,12 +1,11 @@
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
-import prettierPlugin from 'eslint-plugin-prettier';
+import prettier from 'eslint-plugin-prettier';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 export default [
-  tsPlugin.configs['eslint-recommended'],
-  tsPlugin.configs['recommended'],
-  prettierPlugin['recommended'],
   {
+    ignores: ['dist', 'public', 'node_modules'],
     files: ['makers/*.ts', 'src/**/*.ts'],
     languageOptions: {
       ecmaVersion: 'latest',
@@ -15,11 +14,12 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
-      prettier: prettierPlugin,
+      prettier,
+      jsdoc,
     },
     rules: {
       'prettier/prettier': 'error',
-      indent: ['error', 2],
+      indent: ['error', 2, { SwitchCase: 1 }],
       'linebreak-style': ['error', 'unix'],
       'prefer-const': 'error',
       quotes: ['error', 'single'],
