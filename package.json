@@ -18,7 +18,7 @@
     "url": "https://github.com/remotemerge/cache-server/issues"
   },
   "engines": {
-    "node": ">=18.16"
+    "node": ">=20.10 <21.0.0"
   },
   "prettier": {
     "singleQuote": true
