@@ -1,6 +1,6 @@
 {
   "name": "@sapkotamadan/cache-server",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "CacheServer is an efficient web page extractor that uses Puppeteer to launch a headless browser and fetch web page content.",
   "homepage": "https://github.com/remotemerge/cache-server",
   "license": "MIT",
@@ -18,41 +18,36 @@
     "url": "https://github.com/remotemerge/cache-server/issues"
   },
   "engines": {
-    "node": ">=18.16"
+    "node": ">=20.10 <21.0.0"
   },
   "prettier": {
-    "bracketSameLine": true,
-    "printWidth": 120,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
+    "singleQuote": true
   },
   "type": "module",
   "scripts": {
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "build": "vite build && ts-node --esm --files makers/package.ts",
+    "format": "prettier --write **/*.ts **/**/*.ts",
+    "build": "vite build && tsx ./makers/package.ts",
     "cache-server": "npm run build && node dist/js/app.js"
   },
   "dependencies": {
     "express": "^4.18.2",
-    "puppeteer": "^19.10.0"
+    "puppeteer": "^21.6.1"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.13",
-    "@types/express": "^4.17.17",
-    "@types/node": "^18.15.13",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "eslint": "^8.38.0",
-    "eslint-plugin-jsdoc": "^43.0.7",
-    "globals": "^13.20.0",
-    "ts-node": "^10.9.1",
-    "tslib": "^2.5.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.1"
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-jsdoc": "^46.9.1",
+    "eslint-plugin-prettier": "^5.1.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
   },
   "optionalDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^3.1.1"
   }
 }

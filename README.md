@@ -11,7 +11,11 @@ With a customizable configuration and easy-to-use parameters, CacheServer is the
 
 ### System Requirements
 
-CacheServer is compatible with Node.js v14 and above, although using the latest version of Node.js is highly recommended to ensure access to all features and optimal performance.
+- CacheServer is compatible with Node.js v14 and above, although using the latest version of Node.js is highly recommended to ensure access to all features and optimal performance.
+- If you encounter errors, please refer to the Puppeteer troubleshooting instructions:
+  ```text
+  https://pptr.dev/troubleshooting
+  ```
 
 **Note:** Ensure that Node.js is properly installed and accessible in system PATH.
 

@@ -1,13 +1,15 @@
 import puppeteer from 'puppeteer';
 import type { EngineConfigType } from './types';
 
-export const renderPage = async (configs: EngineConfigType): Promise<string> => {
+export const renderPage = async (
+  configs: EngineConfigType,
+): Promise<string> => {
   // init content holder
   let html = '';
 
   // init browser and configure and launch
   const browser = await puppeteer.launch({
-    headless: configs.headless ?? true, // default is true
+    headless: configs.headless ?? 'new', // default is new
     ignoreHTTPSErrors: true, // default false
     timeout: 60000, // default to 30 seconds
     args: [

@@ -1,40 +1,29 @@
-import globals from 'globals';
-import tsEslintParser from '@typescript-eslint/parser';
-import tsEslintPlugin from '@typescript-eslint/eslint-plugin';
-import jsdocEslintPlugin from 'eslint-plugin-jsdoc';
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import prettier from 'eslint-plugin-prettier';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**', '**/*.html'],
-  },
-  {
-    files: ['**/*.ts', '**/*.js'],
-    rules: {
-      'linebreak-style': ['error', 'unix'],
-      'no-console': 'warn',
-      'no-undef': 'error',
-      'no-unused-vars': 'error',
-      'prefer-const': 'error',
-      indent: ['error', 2, { SwitchCase: 1 }],
-      quotes: ['error', 'single'],
-      semi: ['error', 'always'],
-    },
-    plugins: {
-      jsdocEslintPlugin,
-    },
+    ignores: ['dist', 'public', 'node_modules'],
+    files: ['makers/*.ts', 'src/**/*.ts'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: { ...globals.browser, ...globals.node },
-    },
-  },
-  {
-    files: ['**/*.ts'],
-    languageOptions: {
-      parser: tsEslintParser,
+      parser: tsParser,
     },
     plugins: {
-      '@typescript-eslint': tsEslintPlugin,
+      '@typescript-eslint': tsPlugin,
+      prettier,
+      jsdoc,
+    },
+    rules: {
+      'prettier/prettier': 'error',
+      indent: ['error', 2, { SwitchCase: 1 }],
+      'linebreak-style': ['error', 'unix'],
+      'prefer-const': 'error',
+      quotes: ['error', 'single'],
+      semi: ['error', 'always'],
     },
   },
 ];
