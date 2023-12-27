@@ -1,4 +1,4 @@
-# The workflow to publish package
+# This workflow will publish a package to NPM when a release is created
 name: Production
 
 # Controls when the workflow will run
@@ -14,17 +14,26 @@ jobs:
 
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: "Setup Node.js environment"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
 
       - name: "Install dependencies and build"
         run: npm install && npm run build
 
-      # publish to NPM
-      - uses: actions/setup-node@v3
+      - name: "Configure NPM registry"
+        uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: 20
           registry-url: 'https://registry.npmjs.org'
           scope: '@sapkotamadan'
-      - run: npm publish ./dist --access public
+
+      - name: "Publish to NPM"
+        run: npm publish ./dist --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
